@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace TestProxyCBRApi.Models.Remote {
+    
     /// <summary>
     /// Официальные курсы валют на заданную дату устанавливаемые ежедневно
     /// </summary>

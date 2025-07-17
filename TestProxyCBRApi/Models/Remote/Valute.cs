@@ -1,11 +1,12 @@
-﻿using System.Globalization;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace TestProxyCBRApi.Models.Remote {
+    
     /// <summary>
     /// Информация о конкретной валюте и её курсе
     /// </summary>
     public class Valute {
+        
         /// <summary>
         /// Уникальный идентификатор валюты (атрибут ID).
         /// </summary>

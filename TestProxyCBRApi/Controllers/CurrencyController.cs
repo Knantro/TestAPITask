@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Filters;
-using TestProxyCBRApi.Common;
 using TestProxyCBRApi.Models.Response;
 using TestProxyCBRApi.Services;
 using TestProxyCBRApi.SwaggerExampleModels;

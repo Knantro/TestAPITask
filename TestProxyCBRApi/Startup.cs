@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using Microsoft.AspNetCore.Builder;
@@ -30,29 +29,22 @@ namespace TestProxyCBRApi {
             
             services.AddSwaggerExamples();
             services.AddSwaggerExamplesFromAssemblies(Assembly.GetExecutingAssembly(), assembly);
-            // var contractsAssembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.GetName().Name.Equals(assembly.GetName().Name + ".Contracts"));
-            // if (contractsAssembly != null) services.AddSwaggerExamplesFromAssemblies(contractsAssembly);
-            
             services.AddSwaggerGen(options =>
             {
-                // Добавить документацию основной библиотеки
                 var xmlFile = $"{assembly.GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
 
-                // Добавить документацию других библиотек
                 var baseDirectory = new DirectoryInfo(Path.Combine(AppContext.BaseDirectory));
-                //var xmlsEnumerable = baseDirectory.EnumerateFiles("*.xml").Where(fi => !Path.GetFileName(fi.FullName).StartsWith("System."));
                 var xmlsEnumerable = baseDirectory.EnumerateFiles("*.xml");
                 foreach (var fi in xmlsEnumerable)
                     options.IncludeXmlComments(fi.FullName);
                 
                 options.ExampleFilters();
-                options.SwaggerDoc("v1", new OpenApiInfo
+                options.SwaggerDoc("api", new OpenApiInfo
                 {
-                    Version = "v1",
-                    Title = "ToDo API",
-                    Description = "An ASP.NET Core Web API for managing ToDo items"
+                    Version = "api",
+                    Title = "CBR Proxy API",
                 });
             });
         }
@@ -64,7 +56,7 @@ namespace TestProxyCBRApi {
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                    options.SwaggerEndpoint("/swagger/api/swagger.json", "api");
                     options.RoutePrefix = "swagger";
                 });
             }
